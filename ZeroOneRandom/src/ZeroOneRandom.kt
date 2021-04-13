@@ -38,8 +38,8 @@ maxNumber = 10
 5와 7 중 하나를 선택해 출력한다.
  */
 fun getRandom(maxNumber: Int): Int {
-    var start1 = 0
-    var start2 = maxNumber - 1
+    var start1 = 0 // 0..(maxNumber - 1)
+    var start2 = maxNumber - 1 // (maxNumber - 1)..0
     var size = maxNumber
 
     /*
