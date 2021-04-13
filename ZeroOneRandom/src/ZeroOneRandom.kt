@@ -32,28 +32,22 @@ maxNumber = 10
 5 / 6 - > 왼쪽
 5
 9, 8, 7, 6, 5 / 4, 3, 2, 1, 0 -> 오른쪽
-9, 8 / 7, 6, 5 - > 왼쪽
-9 / 8 -> 왼쪽
-9
-5와 9 중 하나를 선택해 출력한다.
+9, 8 / 7, 6, 5 - > 오른쪽
+7 / 6, 5 -> 왼쪽
+7
+5와 7 중 하나를 선택해 출력한다.
  */
-fun getRandom(maxNumber: Int): Int 
-    var start1 = 0 // 0..(maxNumber - 1)
-    var start2 = maxNumber - 1 // (maxNumber - 1)..0
+fun getRandom(maxNumber: Int): Int {
+    var start1 = 0
+    var start2 = maxNumber - 1
     var size = maxNumber
 
     /*
     0..(maxNumber - 1)
-    size가 홀수인데 왼쪽일 경우 start1 = start1, size /= 2
-    size가 홀수인데 오른쪽일 경우 start1 += size / 2, size = size / 2 + 1
-    size가 짝수인데 왼쪽일 경우 start1 = start1, size /= 2
-    size가 짝수인데 오른쪽일 경우 start1 += size / 2, size /= 2
-
-    (maxNumber - 1)..0
-    size가 홀수인데 왼쪽일 경우 start2 = start2, size /= 2
-    size가 홀수인데 오른쪽일 경우 start2 -= size / 2, size = size / 2 - 1
-    size가 짝수인데 왼쪽일 경우 start2 = start2, size /= 2
-    size가 짝수인데 오른쪽일 경우 start2 -= size / 2, size /= 2
+    size가 홀수인데 왼쪽일 경우 start = start, size /= 2
+    size가 홀수인데 오른쪽일 경우 start += size / 2, size = size / 2 + 1
+    size가 짝수인데 왼쪽일 경우 start = start, size /= 2
+    size가 짝수인데 오른쪽일 경우 start += size / 2, size /= 2
      */
     while(size > 1) {
         if (size % 2 == 1) { // size 홀수
@@ -62,7 +56,6 @@ fun getRandom(maxNumber: Int): Int
 
             else { // 오른쪽
                 start1 += size / 2
-                start2 -= size / 2
                 size = (size / 2) + 1
             }
         }
@@ -72,6 +65,34 @@ fun getRandom(maxNumber: Int): Int
 
             else { // 오른쪽
                 start1 += size / 2
+                size /= 2
+            }
+        }
+    }
+    
+    /*
+    (maxNumber - 1)..0
+    size가 홀수인데 왼쪽일 경우 start = start, size /= 2
+    size가 홀수인데 오른쪽일 경우 start -= size / 2, size = size / 2 - 1
+    size가 짝수인데 왼쪽일 경우 start = start, size /= 2
+    size가 짝수인데 오른쪽일 경우 start -= size / 2, size /= 2
+     */
+    size = maxNumber
+    while(size > 1) {
+        if (size % 2 == 1) { // size 홀수
+            if (getZeroOrOne() == 0) // 왼쪽
+                size /= 2
+
+            else { // 오른쪽
+                start2 -= size / 2
+                size = (size / 2) + 1
+            }
+        }
+        else { // size 짝수
+            if (getZeroOrOne() == 0) // 왼쪽
+                size /= 2
+
+            else { // 오른쪽
                 start2 -= size / 2
                 size /= 2
             }
